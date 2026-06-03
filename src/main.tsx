@@ -84,15 +84,6 @@ function App() {
             </ul>
           </nav>
 
-          {/* Sidebar Footer */}
-          <div className="absolute bottom-0 left-0 w-64 p-4 border-t border-border bg-muted space-y-2">
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              ⚙️ Settings
-            </Button>
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              🚪 Logout
-            </Button>
-          </div>
         </aside>
 
         {/* Main Content */}
