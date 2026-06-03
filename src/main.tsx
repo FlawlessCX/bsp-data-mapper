@@ -2,37 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { useState } from 'react'
 
-const menuItems = {
-  'buying-partner': [
-    { label: 'Dashboard', icon: '📊', id: 'dashboard' },
-    { label: 'Browse Marketplace', icon: '🔍', id: 'marketplace' },
-    { label: 'My Interests', icon: '❤️', id: 'interests' },
-    { label: 'Matched Cases', icon: '🤝', id: 'cases' },
-    { label: 'Borrowing Calculator', icon: '💰', id: 'calculator' },
-    { label: 'Messages', icon: '💬', id: 'messages' },
-    { label: 'Help & Support', icon: '❓', id: 'help' },
-  ],
-  'selling-partner': [
-    { label: 'Dashboard', icon: '📊', id: 'dashboard' },
-    { label: 'My Listings', icon: '📋', id: 'listings' },
-    { label: 'Create Listing', icon: '➕', id: 'create' },
-    { label: 'Interested Buyers', icon: '👥', id: 'buyers' },
-    { label: 'Matched Cases', icon: '🤝', id: 'cases' },
-    { label: 'Documents', icon: '📄', id: 'documents' },
-    { label: 'Messages', icon: '💬', id: 'messages' },
-    { label: 'Help & Support', icon: '❓', id: 'help' },
-  ],
-  'internal': [
-    { label: 'Overview', icon: '📈', id: 'overview' },
-    { label: 'Buyers', icon: '🛍️', id: 'buyers' },
-    { label: 'Sellers', icon: '🏪', id: 'sellers' },
-    { label: 'Marketplace', icon: '🏬', id: 'marketplace' },
-    { label: 'Matched Cases', icon: '🤝', id: 'cases' },
-    { label: 'Documents', icon: '📄', id: 'documents' },
-    { label: 'Messages', icon: '💬', id: 'messages' },
-    { label: 'Reports', icon: '📊', id: 'reports' },
-  ],
-}
+const menuItems = [
+  { label: 'Dashboard', icon: '📊', id: 'dashboard' },
+  { label: 'Tasks', icon: '✓', id: 'tasks' },
+  { label: 'Messages', icon: '💬', id: 'messages' },
+  { label: 'Files', icon: '📄', id: 'files' },
+]
 
 function App() {
   const [currentRole, setCurrentRole] = useState('buying-partner')
@@ -87,7 +62,7 @@ function App() {
           {/* Menu Items */}
           <nav className="p-4">
             <ul className="space-y-2">
-              {menuItems[currentRole as keyof typeof menuItems].map((item) => (
+              {menuItems.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => setActiveMenu(item.id)}
