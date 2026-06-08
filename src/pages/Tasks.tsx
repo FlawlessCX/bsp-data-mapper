@@ -1,17 +1,24 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
-import { CheckSquare } from 'lucide-react'
+import { CheckSquare, ArrowRight } from 'lucide-react'
 
 interface TasksProps {
   currentRole: string
 }
 
+interface Task {
+  id: number
+  title: string
+  status: 'pending' | 'completed'
+  dueDate: string
+  priority: 'high' | 'medium' | 'low'
+  step?: number
+}
+
 const mockTasks = {
   'buying-partner': [
-    { id: 1, title: 'Review listing #2451', status: 'pending', dueDate: '2026-06-05', priority: 'high' },
-    { id: 2, title: 'Submit interest in ABC Advisory Group', status: 'pending', dueDate: '2026-06-08', priority: 'high' },
-    { id: 3, title: 'Upload tax returns for qualification', status: 'completed', dueDate: '2026-06-01', priority: 'high' },
-    { id: 4, title: 'Schedule call with seller', status: 'pending', dueDate: '2026-06-10', priority: 'medium' },
+    { id: 1, title: 'Complete Buying Calculator & Share results', status: 'pending', dueDate: '2026-06-05', priority: 'high', step: 1 },
+    { id: 2, title: 'Complete ALIE Forms & Upload any required Financial Docs', status: 'pending', dueDate: '2026-06-08', priority: 'high', step: 2 },
   ],
   'selling-partner': [
     { id: 1, title: 'Update listing documents', status: 'pending', dueDate: '2026-06-05', priority: 'high' },
@@ -69,28 +76,50 @@ export function Tasks({ currentRole }: TasksProps) {
       {/* Pending Tasks */}
       {pendingTasks.length > 0 && (
         <>
-          <h3 className="text-xl font-bold mb-4 text-foreground">Pending</h3>
-          <div className="space-y-3 mb-8">
-            {pendingTasks.map(task => (
-              <Card key={task.id} className="hover:shadow-md transition">
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-3 flex-1">
-                      <CheckSquare className="w-5 h-5 text-muted-foreground mt-1" />
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-foreground">{task.title}</h4>
-                        <p className="text-sm text-muted-foreground mt-1">Due: {task.dueDate}</p>
+          <h3 className="text-xl font-bold mb-4 text-foreground">
+            {currentRole === 'buying-partner' ? 'Onboarding Workflow' : 'Pending'}
+          </h3>
+          {currentRole === 'buying-partner' && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-900">
+                Follow these steps in order to complete your buyer qualification:
+              </p>
+            </div>
+          )}
+          <div className={currentRole === 'buying-partner' ? 'space-y-4 mb-8' : 'space-y-3 mb-8'}>
+            {pendingTasks.map((task, index) => (
+              <div key={task.id}>
+                <Card className="hover:shadow-md transition">
+                  <CardContent className="p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start gap-3 flex-1">
+                        {currentRole === 'buying-partner' && task.step ? (
+                          <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
+                            {task.step}
+                          </div>
+                        ) : (
+                          <CheckSquare className="w-5 h-5 text-muted-foreground mt-1 flex-shrink-0" />
+                        )}
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-foreground">{task.title}</h4>
+                          <p className="text-sm text-muted-foreground mt-1">Due: {task.dueDate}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 flex-shrink-0">
+                        <span className={`text-sm font-medium ${getPriorityColor(task.priority)}`}>
+                          {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
+                        </span>
+                        <Button size="sm" variant="outline">Start</Button>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className={`text-sm font-medium ${getPriorityColor(task.priority)}`}>
-                        {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-                      </span>
-                      <Button size="sm" variant="outline">Start</Button>
-                    </div>
+                  </CardContent>
+                </Card>
+                {currentRole === 'buying-partner' && index < pendingTasks.length - 1 && (
+                  <div className="flex justify-center py-2">
+                    <ArrowRight className="w-5 h-5 text-muted-foreground rotate-90" />
                   </div>
-                </CardContent>
-              </Card>
+                )}
+              </div>
             ))}
           </div>
         </>
