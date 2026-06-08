@@ -79,6 +79,44 @@ const buyerWorkflow: WorkflowStep[] = [
   },
 ]
 
+const sellerWorkflow: WorkflowStep[] = [
+  {
+    id: 'digital-mp',
+    title: 'Step 1: Digital Marketplace',
+    status: 'in-progress',
+    subtasks: [
+      { id: 'decision', title: 'Receive a Decision allowing access to Digital Marketplace', status: 'pending' },
+      { id: 'register', title: 'Register for Digital Marketplace', status: 'pending' },
+      { id: 'match', title: 'Matching Process (Seller and Buyer are matched)', status: 'pending' },
+    ],
+  },
+  {
+    id: 'disclosures',
+    title: 'Step 2: Practice & Disclosures',
+    status: 'pending',
+    subtasks: [
+      { id: 'checklist', title: 'Complete Seller practice & disclosures checklist', status: 'pending' },
+      { id: 'submit', title: 'Submit', status: 'pending' },
+    ],
+  },
+  {
+    id: 'valuation',
+    title: 'Step 3: Valuation & Due Diligence',
+    status: 'pending',
+    subtasks: [
+      { id: 'report', title: 'Add automated valuation and due diligence report', status: 'pending' },
+    ],
+  },
+  {
+    id: 'seller-tasks',
+    title: 'Step 4: Seller Tasks',
+    status: 'pending',
+    subtasks: [
+      { id: 'pending', title: 'Awaiting next steps...', status: 'pending' },
+    ],
+  },
+]
+
 const sellerTasks = [
   { id: 1, title: 'Update listing documents', status: 'pending' as const, dueDate: '2026-06-05', priority: 'high' as const },
   { id: 2, title: 'Respond to buyer inquiry', status: 'pending' as const, dueDate: '2026-06-04', priority: 'high' as const },
@@ -225,6 +263,49 @@ export function Tasks({ currentRole }: TasksProps) {
         {/* Workflow Steps */}
         <div>
           {buyerWorkflow.map((step, index) => (
+            <WorkflowStepCard key={step.id} step={step} index={index} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (currentRole === 'selling-partner') {
+    const completedSteps = sellerWorkflow.filter(s => s.status === 'completed').length
+    const totalSteps = sellerWorkflow.length
+
+    return (
+      <div>
+        <h2 className="text-4xl font-bold mb-2 text-foreground">Seller Journey</h2>
+        <p className="text-muted-foreground mb-8">
+          Your path to list your practice and connect with qualified buyers.
+        </p>
+
+        {/* Progress Overview */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Journey Progress</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <div className="flex-1 bg-gray-200 rounded-full h-3">
+                  <div
+                    className="h-3 rounded-full bg-green-600 transition-all"
+                    style={{ width: `${(completedSteps / totalSteps) * 100}%` }}
+                  />
+                </div>
+              </div>
+              <span className="text-lg font-bold text-green-600">
+                {completedSteps}/{totalSteps} Steps
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Workflow Steps */}
+        <div>
+          {sellerWorkflow.map((step, index) => (
             <WorkflowStepCard key={step.id} step={step} index={index} />
           ))}
         </div>
