@@ -29,7 +29,7 @@ export function RootLayout() {
               onClick={() => setUserRole('internal')}
               className={`btn btn-sm ${currentUserRole === 'internal' ? 'btn-primary' : 'btn-ghost'}`}
             >
-              Internal Team
+              Internal BP
             </button>
           </div>
         </div>
