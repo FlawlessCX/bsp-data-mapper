@@ -1,4 +1,4 @@
-# BSP Data Mapper Tool
+# BSP Platform
 
 A prototype web application for managing Buyer-Seller Partnerships in the financial advisory space.
 

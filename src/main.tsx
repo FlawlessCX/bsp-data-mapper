@@ -40,7 +40,7 @@ function App() {
       {/* Top Navigation */}
       <nav className="bg-card border-b border-border shadow-sm">
         <div className="px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary">BSP Data Mapper</h1>
+          <h1 className="text-2xl font-bold text-primary">BSP Platform</h1>
           <div className="flex gap-2">
             <Button
               onClick={() => setCurrentRole('buying-partner')}

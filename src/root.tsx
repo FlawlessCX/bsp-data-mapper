@@ -9,7 +9,7 @@ export function RootLayout() {
     <div className="min-h-screen bg-base-100">
       <nav className="navbar bg-base-200 shadow-lg">
         <div className="flex-1">
-          <h1 className="text-2xl font-bold px-4">BSP Data Mapper</h1>
+          <h1 className="text-2xl font-bold px-4">BSP Platform</h1>
         </div>
         <div className="flex-none gap-2 px-4">
           <div className="btn-group">
