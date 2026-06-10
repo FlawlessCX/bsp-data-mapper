@@ -61,7 +61,7 @@ function App() {
               variant={currentRole === 'internal' ? 'default' : 'outline'}
               size="sm"
             >
-              Internal BP
+              Business Partner
             </Button>
           </div>
         </div>
@@ -74,7 +74,7 @@ function App() {
           <div className="p-6 border-b border-border">
             <p className="text-sm font-medium text-muted-foreground">Role</p>
             <p className="text-lg font-bold text-foreground mt-1">
-              {currentRole === 'buying-partner' ? 'Buying Partner' : currentRole === 'selling-partner' ? 'Selling Partner' : 'Internal BP'}
+              {currentRole === 'buying-partner' ? 'Buying Partner' : currentRole === 'selling-partner' ? 'Selling Partner' : 'Business Partner'}
             </p>
           </div>
 

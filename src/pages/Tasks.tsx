@@ -313,7 +313,7 @@ export function Tasks({ currentRole }: TasksProps) {
     )
   }
 
-  // Seller and Internal BP tasks
+  // Seller and Business Partner tasks
   const tasks = currentRole === 'selling-partner' ? sellerTasks : internalBPTasks
   const pendingTasks = tasks.filter(t => t.status === 'pending')
   const completedTasks = tasks.filter(t => t.status === 'completed')
